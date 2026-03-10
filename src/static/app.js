@@ -8,6 +8,26 @@ document.addEventListener("DOMContentLoaded", () => {
   const activityInput = document.getElementById("activity");
   const closeRegistrationModal = document.querySelector(".close-modal");
 
+  // Dark mode elements
+  const darkModeToggle = document.getElementById("dark-mode-toggle");
+  const darkModeIcon = document.getElementById("dark-mode-icon");
+
+  // Apply saved dark mode preference on load
+  if (localStorage.getItem("darkMode") === "enabled") {
+    document.body.classList.add("dark-mode");
+    darkModeIcon.textContent = "☀️";
+    darkModeToggle.setAttribute("aria-pressed", "true");
+  }
+
+  // Toggle dark mode on button click
+  darkModeToggle.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+    const isDark = document.body.classList.contains("dark-mode");
+    darkModeIcon.textContent = isDark ? "☀️" : "🌙";
+    darkModeToggle.setAttribute("aria-pressed", isDark ? "true" : "false");
+    localStorage.setItem("darkMode", isDark ? "enabled" : "disabled");
+  });
+
   // Search and filter elements
   const searchInput = document.getElementById("activity-search");
   const searchButton = document.getElementById("search-button");
